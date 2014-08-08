@@ -1,15 +1,15 @@
 function [R,alpha,beta]=Rkp_imp(k,p)
-%function [R,alpha,beta]=Rkp_imp(k,p)
-%Author: David Ketcheson
+% function [R,alpha,beta]=Rkp_imp(k,p)
 %
-%Find the optimal SSP k-step implicit LMM with order of accuracy p
+% Find the optimal SSP k-step implicit LMM with order of accuracy p
 %
-%Inputs: k = # of steps
-%        p = order of accuracy
+% Inputs: 
+%       * k = # of steps
+%       * p = order of accuracy
 %
-%Outputs: alpha, beta = the coefficients of the method
+% Outputs: alpha, beta = the coefficients of the method
 %
-%Depends on MATLAB's optimization toolbox for the LP solver
+% Depends on MATLAB's optimization toolbox for the LP solver
     
 %=========================================================
 %Initialize

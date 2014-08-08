@@ -2,40 +2,50 @@
 Overview
 ********
 
-`RK-opt <https://github.com/ketch/RK-opt>`_ is a MATLAB package designed to find 
-Runge-Kutta (RK) methods with some optimal time stepping properties for a given stability
-function :math:`R(z)`, the order of accuracy :math:`p` and its 
-number of stages :math:`s` or just the last two parameters (i.e. :math:`p` and 
-:math:`s`). It can compute the coefficients of explicit, 
-diagonally implicit and fully implicit RK schemes. This package 
-uses the MATLAB's fmincon function to handle nonlinear optimization problems. 
+`RK-opt <https://github.com/ketch/RK-opt>`_ is a MATLAB package for designing
+Runge-Kutta (RK) methods and stability polynomials.
+Supported objective functions include the principal
+error norm and the SSP coefficient.  Supported constraints include stability
+polynomial coefficients, low-storage formulations, and structural constraints
+(explicit, diagonally implicit, etc.)
+RK-opt uses MATLAB's optimization toolbox, in particular *fmincon* and *linprog*.
 
-MATLAB global optimization toolbox with *Multistart* can be used to exploit the 
+MATLAB's global optimization toolbox function *Multistart* can be used to exploit the
 benefits of parallel search on multicore machines.
 
 
-The RK-Opt pacakge consists of the following packages:
-    * **RK-coeff-opt**: Find optimal Runge-Kutta method coefficients, for a prescribed order of accuracy and number of stages.  
+The RK-Opt package consists of the following packages:
+    + :ref:`RK-coeff-opt`:
+                        Find optimal Runge-Kutta method coefficients for a prescribed order of accuracy and number of stages.
                         The objective function
                         can be chosen as either the **SSP coefficient** or the
                         **leading truncation error coefficient**.
                         The method may be constrained to have a **low-storage implementation**
                         and/or a prescribed **stability polynomial**.
                         Implicit and diagonally implicit methods can also be optimized.
-    * **am_rad-opt**: Find stability functions with optimal radius of absolute monotonicity.
-                        This includes codes for optimizing stability functions of 
+    + :ref:`am_radius-opt`:
+                        Find stability functions with optimal radius of absolute monotonicity.
+                        This includes codes for optimizing stability functions of
                         multistep, multistage methods and even methods with downwinding.
                         The optimization of rational functions is experimental.
+    + :ref:`polyopt`:
+                        Given a spectrum (typically corresponding to a spatial
+                        semi-discretization of a PDE), find an optimal stability
+                        polynomial in terms of its coefficients.  These polynomial
+                        coefficients can then be used
+                        as input to **RK-coeff-opt** to find a corresponding Runge-Kutta
+                        method.
+    + :ref:`RKtools`:
+                        Some general utilities for analyzing Runge-Kutta methods.
 
-The following packages are now deprecated:
-    * **SSP**: given the order of the scheme :math:`p` and its number of stages :math:`s` it can find the optimal RK method in terms of **SSP coefficient**
-    * **low-storage**: given the order of the scheme :math:`p` and its number of stages :math:`s` it can find the optimal RK method that has the **minimal leading truncation error coefficient**
+RK-opt has been developed by David Ketcheson (primary developer and maintainer),
+Matteo Parsani, and Aron Ahmadia.  Additional contributions include:
 
-Some of the functionality in these deprecated packages has not yet been incorporated
-in **RK-coeff-opt**.
+    + Order conditions for multistep RK methods of orders 9-11 (Christopher Bresten, Zachary Grant, and Daniel Higgs)
 
-A Python version of the package is also planned.
 
+It is released under a modified BSD License.
+If you use RK-Opt in published work, please see :ref:`citing`. 
 
 *******
 RK-opt
@@ -44,8 +54,31 @@ RK-opt
 .. toctree::
    :maxdepth: 2
 
+   rk-methods
    started
-   structure_general
-   tutorial
-   about
-   future
+   citing
+
+*********
+Reference
+*********
+This section contains a compilation of the documentation of each function,
+organized by subpackage.
+
+.. toctree::
+   :maxdepth: 2
+
+   RK-coeff-opt
+   am_radius-opt
+   polyopt
+   RKtools
+
+
+************
+Contributing
+************
+
+If you wish to contribute, we recommend that you
+fork the `RK-Opt GitHub repository <https://github.com/ketch/RK-opt>`_,
+implement your additions, and `issue a pull request
+<https://help.github.com/articles/using-pull-requests>`_.  You may also
+simply e-mail a patch to us.
